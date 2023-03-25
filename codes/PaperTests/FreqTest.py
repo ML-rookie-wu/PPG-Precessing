@@ -239,8 +239,8 @@ def feature_test(dir_path):
             print(file_path)
             data = read_from_file(file_path)
             ir = data.ir2
-            raw_data = ir[5000:9000]
-            filtered_data = bandpass_filter(ir, fs=500, start_fs=0.6, end_fs=3)[5000:9000]
+            raw_data = ir[5000:10000]
+            filtered_data = bandpass_filter(ir, fs=500, start_fs=0.1, end_fs=5)[5000:10000]
             # filtered_data = bandpass_filter(raw_data, fs=500, start_fs=0.1, end_fs=5)
             feature_list, start_peak_list, start_valley_list = get_features(raw_data, filtered_data)
             all_feature_list.append(feature_list)
@@ -248,10 +248,10 @@ def feature_test(dir_path):
             peak_value = [filtered_data[x] for x in start_peak_list]
             valley_value = [filtered_data[y] for y in start_valley_list]
 
-            # plt.plot(filtered_data)
-            # plt.scatter(start_peak_list, peak_value, color="red")
-            # plt.scatter(start_valley_list, valley_value, color="cyan")
-            # plt.show()
+            plt.plot(filtered_data)
+            plt.scatter(start_peak_list, peak_value, color="red")
+            plt.scatter(start_valley_list, valley_value, color="cyan")
+            plt.show()
 
     for i in range(len(all_feature_list)):
         f0.append(all_feature_list[i][0])
@@ -285,10 +285,10 @@ def feature_test(dir_path):
     plt.show()
 
 if __name__ == '__main__':
-    dir_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\respiration1"
+    dir_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\respiration2"
     # dir_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\resp_test"
-    test(dir_path)
-    # feature_test(dir_path)
+    # test(dir_path)
+    feature_test(dir_path)
 
 
 
