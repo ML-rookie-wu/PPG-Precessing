@@ -1,2 +1,2 @@
-# python-learning
-记录python-learnning的学习代码
+# graduation projects
+课题相关代码
