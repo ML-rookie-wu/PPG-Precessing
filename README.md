@@ -1,4 +1,4 @@
-# graduation projects
+# PPG-processing
 1. PPG信号的采集、处理、特征点和特征的提取等
 2. 心率、血氧饱和度的计算
 3. 使用机器学习方法检测呼吸暂停
