@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from codes.utils.MyFilters import VMD
 from codes.utils.GetFileData import read_from_file
+from codes.utils.Normal import normalization
 
 
 
@@ -27,16 +28,48 @@ def loss_mape(u, data):
         total += abs((data[i] - u_k) / data[i])
     return total / len(data)
 
+def REI():
+    # file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\respiration\2\20230314200844.txt"
+    file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\real_data\paper_resp\2023_02_17_12_02_54.txt"
+    data = read_from_file(file_path)
+    ir = data.ir2
+    raw_data = np.array(ir[5000:9000])
+    # raw_data = np.array(normalization(raw_data))
+
+
+    K = 12
+    alpha = 5000
+    # tau = 0
+    tau_list = np.arange(0.000001, 0.0001, 0.000001)
+    err_list = []
+    count = 0
+    for tau in tau_list:
+        count += 1
+        print("-----------------%s---------------" % count)
+        print("tau = ", tau)
+        vmd = VMD(K, alpha, tau)
+        u, omega = vmd(raw_data)
+        restruct = np.sum(u, 0)
+        s_err = restruct - raw_data
+        error = np.mean([abs(s_err[i]) for i in range(len(s_err))])
+        err_list.append(error)
+        print("error = ", error)
+    plt.plot(err_list, marker="*")
+    plt.show()
+
+
+
 def main():
-    file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\respiration\2\20230314200844.txt"
+    # file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\respiration\2\20230314200844.txt"
+    file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\real_data\paper_resp\2023_02_17_12_02_54.txt"
     data = read_from_file(file_path)
     ir = data.ir2
     raw_data = np.array(ir[5000:9000])
 
     # K = 8
-    alpha = 5000
+    alpha = 10000
     tau = 1e-6
-    Klist = range(3, 15)
+    Klist = range(1, 15)
     Elist = []
     for K in Klist:
         vmd = VMD(K, alpha, tau)
@@ -59,4 +92,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    REI()

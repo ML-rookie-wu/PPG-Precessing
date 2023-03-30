@@ -37,7 +37,10 @@ def get_freq(freq_value, freq_energe):
     N = int(len(freq_value) / 2)
     max_index = np.argmax(freq_energe[0:N])
 
+    max_index2 = np.argsort(freq_energe[0:N])[-2]
     max_ap = np.max(freq_energe)
+
     freq = freq_value[max_index]
+    freq2 = freq_value[max_index2]
 
     return freq, max_ap

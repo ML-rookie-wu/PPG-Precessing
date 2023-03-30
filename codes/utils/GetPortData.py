@@ -7,6 +7,8 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
 
+from codes.utils.MyFilters import bandpass_filter
+
 
 def get_port():
     # print(list(lp.comports()[0]))
@@ -181,6 +183,7 @@ def collect_data_pulse(read_func):
         path = read_func(dir, pulse)
 
 def draw(data):
+    buttered = bandpass_filter(data["ir2"], fs=500, start_fs=0.025, end_fs=5)
     plt.figure(figsize=(10, 8))
     plt.subplot(311)
     plt.plot(data['ir2'])
@@ -189,7 +192,8 @@ def draw(data):
     plt.plot(data['red2'])
     plt.title('red2')
     plt.subplot(313)
-    plt.plot(data['resp'])
+    # plt.plot(data['resp'])
+    plt.plot(buttered)
     plt.title("resp")
     plt.subplots_adjust(hspace=0.8)
     plt.show()
@@ -233,7 +237,7 @@ def collect_resp_data(save_path=None):
         dir = r'D:\my_projects_V1\my_projects\PPG_V1\data\real_data\paper_resp'
         path = os.path.join(dir, time.strftime("%Y%m%d%H%M%S", time.localtime()) + '.txt')
 
-    read_package(path, num=30000)
+    read_package(path, num=180000)
     data = pd.read_table(path, sep=",")
     if data.shape[1] == 6:
         data.columns = ["time", "ir1", "red1", "ir2", "red2", "resp"]
@@ -247,9 +251,9 @@ if __name__ == '__main__':
 
     # collect_data_spo2(read_package_from_port)
     # collect_data_pulse(read_package_from_port)
-    collect_test()
+    # collect_test()
     # collect_real_data()
     # collect_resp_data()
 
-    # collect_resp_data(save_path=r'D:\my_projects_V1\my_projects\PPG_V1\data\real_data\wu\old')
+    collect_resp_data(save_path=r'D:\my_projects_V1\my_projects\PPG_V1\data\resp_compare\diff_situations')
 

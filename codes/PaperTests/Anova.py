@@ -104,7 +104,8 @@ def my_oneWayAnova(df, cata_name, num_name, alpha_anova=0.05, alpha_tukey=0.05):
 
     return df_p1, df_p2
 
-def main(df_0):
+def analysis(df_0, column_name):
+    """特征箱型图分析"""
     fig = plt.figure(figsize=(12, 16))
     for i in range(1, len(column_name)):
         print("----------------%s-------------" % column_name[i])
@@ -117,7 +118,7 @@ def main(df_0):
         # ax.set_title(column_name[i])
         sns.set_theme(font="Time New Roman")
         plt.subplots_adjust(wspace=0.5, hspace=0.3)
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "特征分析"), dpi=300, bbox_inches="tight")
+    # plt.savefig(os.path.join(PAPER_FIGURE_PATH, "特征分析"), dpi=300, bbox_inches="tight")
     plt.show()
 
 
@@ -128,4 +129,4 @@ if __name__ == '__main__':
     # print(df1)
     # print(df2)
 
-    main(df_0)
+    analysis(df_0, column_name)

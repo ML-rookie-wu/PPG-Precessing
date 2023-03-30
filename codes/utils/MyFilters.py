@@ -141,9 +141,7 @@ class VMD:
         u = u[idx, :]
         return u, omega_K
 
-def vmd(data):
-    K = 8
-    alpha = 5000
+def vmd(data, K=8, alpha=5000):
     tau = 1e-6
     vmd = VMD(K, alpha, tau)
     u, omega_K = vmd(data)

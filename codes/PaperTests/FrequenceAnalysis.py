@@ -459,6 +459,7 @@ def split_data_10():
 
 
 def make_features():
+    """制作特征数据集"""
     # dir_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\LSTMDataset\all_data_modify"
     # save_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\LSTMDataset\features_modify.csv"
     dir_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\LSTMDataset\all_data_10"
@@ -473,16 +474,18 @@ def make_features():
             data = get_csv_data(file_path)
             ir = data.ir
             feature_list = get_features(ir)
-            column = ["label", "raw_mean", "ppTime_mean", "ppTime_std", "ppTime_rms", "nn50_num", "pnn50", "up_time_mean", "up_time_std", "amp_diff_mean", "amp_diff_std", "peak_amp_mean", "peak_amp_std"]
+
             feature = (label,) + feature_list
             features.append(feature)
+    column = ["label", "raw_mean", "ppTime_mean", "ppTime_std", "ppTime_rms", "nn50_num", "pnn50", "up_time_mean",
+              "up_time_std", "amp_diff_mean", "amp_diff_std", "peak_amp_mean", "peak_amp_std"]
     df_features = pd.DataFrame(features, columns=column)
     # 保存特征
-    df_features.to_csv(save_path, index=False)
+    # df_features.to_csv(save_path, index=False)
     plt.figure(figsize=(10, 8))
     sns.heatmap(df_features.corr(), annot=True)
     plt.xticks(rotation=45)
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "相关性new"), dpi=300, bbox_inches="tight")
+    # plt.savefig(os.path.join(PAPER_FIGURE_PATH, "相关性new"), dpi=300, bbox_inches="tight")
     plt.show()
 
 
@@ -490,7 +493,7 @@ def model_test():
     # path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\LSTMDataset\features.csv"
     # path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\LSTMDataset\features_rever.csv"
     # path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\LSTMDataset\features_modify.csv"
-    path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\LSTMDataset\features_10.csv"
+    path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\LSTMDataset\features_10_new.csv"
 
     data = pd.read_csv(path, sep=",")
     # model = svm.SVC(kernel="linear", decision_function_shape="ovo")
@@ -501,18 +504,18 @@ def model_test():
     x = data.iloc[:, 1:]
     x, y = shuffle(x, y)
 
-    train_data, test_data, train_target, test_target = train_test_split(x, y, test_size=0.3, random_state=20)    # 初始random_state =42
+    train_data, test_data, train_target, test_target = train_test_split(x, y, test_size=0.3, random_state=20, shuffle=False)    # 初始random_state =42
     std = StandardScaler()
     train_data_std = std.fit_transform(train_data)
     test_data_std = std.transform(test_data)
 
     print(train_data_std.shape, train_target.shape, test_data_std.shape, test_target.shape)
-    # my_svm(train_data_std, train_target, test_data_std, test_target)
-    # my_logistic(train_data_std, train_target, test_data_std, test_target)
-    # my_random_forest(train_data_std, train_target, test_data_std, test_target)
-    # my_knn(train_data_std, train_target, test_data_std, test_target)
-    # my_bayes(train_data_std, train_target, test_data_std, test_target)
-    my_decision_tree(train_data_std, train_target, test_data_std, test_target)
+    my_svm(train_data_std, train_target, test_data_std, test_target, pic_save=False, model_save=True, model_save_name="svm12features")
+    my_logistic(train_data_std, train_target, test_data_std, test_target, pic_save=False)
+    my_random_forest(train_data_std, train_target, test_data_std, test_target, pic_save=False)
+    my_knn(train_data_std, train_target, test_data_std, test_target, pic_save=False)
+    my_bayes(train_data_std, train_target, test_data_std, test_target, pic_save=False)
+    my_decision_tree(train_data_std, train_target, test_data_std, test_target, pic_save=False)
 
 
     # model.fit(train_data_std, train_target)

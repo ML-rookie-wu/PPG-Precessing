@@ -53,7 +53,7 @@ def cal_sp(y_true, y_predict):
     return tn / (tn + fp)
 
 
-def my_logistic(x_train, y_train, x_test, y_test):
+def my_logistic(x_train, y_train, x_test, y_test, pic_save=False, model_save=False, model_save_name=None):
     print("------------------logistic regression-------------------------")
     clf = LogisticRegression(penalty="l2")
     clf.fit(x_train, y_train)
@@ -89,11 +89,17 @@ def my_logistic(x_train, y_train, x_test, y_test):
     plt.legend(loc="lower right")
     plt.show()
 
-    # with open("logistic.pickle", "wb") as f:
-    #     pickle.dump(clf, f)
+    if model_save:
+        if model_save_name is not None:
+            model_name = model_save_name + ".pickle"
+        else:
+            model_name = "logistic.pickle"
+
+        with open(model_name, "wb") as f:
+            pickle.dump(clf, f)
 
 
-def my_knn(x_train, y_train, x_test, y_test):
+def my_knn(x_train, y_train, x_test, y_test, pic_save=False, model_save=False, model_save_name=None):
     print("---------------------KNN--------------------")
     knn = KNeighborsClassifier(weights="distance", algorithm="kd_tree", leaf_size=10)
     param_grid = {"n_neighbors": np.arange(2, 18)}
@@ -118,7 +124,8 @@ def my_knn(x_train, y_train, x_test, y_test):
     plt.title("混淆矩阵", y=1.01)
     plt.ylabel("真实值")
     plt.xlabel("预测值")
-    plt.savefig(os.path.join(pic_path, "knn_matric"), dpi=300)
+    if pic_save:
+        plt.savefig(os.path.join(pic_path, "knn_matric"), dpi=300)
     plt.show()
 
     probs = grid_knn.predict_proba(x_test)
@@ -135,8 +142,17 @@ def my_knn(x_train, y_train, x_test, y_test):
     plt.legend(loc="lower right")
     plt.show()
 
+    if model_save:
+        if model_save_name is not None:
+            model_name = model_save_name + ".pickle"
+        else:
+            model_name = "knn.pickle"
 
-def my_bayes(x_train, y_train, x_test, y_test):
+        with open(model_name, "wb") as f:
+            pickle.dump(grid_knn, f)
+
+
+def my_bayes(x_train, y_train, x_test, y_test, pic_save=False):
     """朴素贝叶斯"""
     print("-----------------Naive Bayes-------------------")
     bayes = GaussianNB().fit(x_train, y_train)
@@ -156,7 +172,8 @@ def my_bayes(x_train, y_train, x_test, y_test):
     plt.title("混淆矩阵", y=1.01)
     plt.ylabel("真实值")
     plt.xlabel("预测值")
-    plt.savefig(os.path.join(pic_path, "bayes_matric"), dpi=300)
+    if pic_save:
+        plt.savefig(os.path.join(pic_path, "bayes_matric"), dpi=300)
     plt.show()
 
     probs = bayes.predict_proba(x_test)
@@ -174,7 +191,7 @@ def my_bayes(x_train, y_train, x_test, y_test):
     plt.show()
 
 
-def my_random_forest(x_train, y_train, x_test, y_test):
+def my_random_forest(x_train, y_train, x_test, y_test, pic_save=False, model_save=False, model_save_name=None):
     print("---------------Random Forest-------------------")
     rfc = RandomForestClassifier(n_estimators=50)
     rfc.fit(x_train, y_train)
@@ -193,7 +210,8 @@ def my_random_forest(x_train, y_train, x_test, y_test):
     plt.title("混淆矩阵", y=1.01)
     plt.ylabel("真实值")
     plt.xlabel("预测值")
-    plt.savefig(os.path.join(pic_path, "randomForest_matric"), dpi=300)
+    if pic_save:
+        plt.savefig(os.path.join(pic_path, "randomForest_matric"), dpi=300)
     plt.show()
 
     # 绘制ROC曲线
@@ -211,6 +229,14 @@ def my_random_forest(x_train, y_train, x_test, y_test):
     plt.legend(loc="lower right")
     plt.show()
 
+    if model_save:
+        if model_save_name is not None:
+            model_name = model_save_name + ".pickle"
+        else:
+            model_name = "randomForest.pickle"
+
+        with open(model_name, "wb") as f:
+            pickle.dump(rfc, f)
 
 def my_random_forest_grid(x_train, y_train, x_test, y_test):
     rfc = RandomForestClassifier()
@@ -245,7 +271,8 @@ def my_random_forest_grid(x_train, y_train, x_test, y_test):
     plt.show()
 
 
-def my_decision_tree(x_train, y_train, x_test, y_test):
+def my_decision_tree(x_train, y_train, x_test, y_test, pic_save=False):
+    print("---------------Decision Tree-------------------")
     dtc = DecisionTreeClassifier()
     param_grid = {"criterion": ["gini", "entropy"],
                   "max_depth": np.arange(2, 30),
@@ -271,7 +298,8 @@ def my_decision_tree(x_train, y_train, x_test, y_test):
     plt.title("混淆矩阵", y=1.01)
     plt.ylabel("真实值")
     plt.xlabel("预测值")
-    plt.savefig(os.path.join(pic_path, "decisionTree_matric"), dpi=300)
+    if pic_save:
+        plt.savefig(os.path.join(pic_path, "decisionTree_matric"), dpi=300)
     plt.show()
 
     probs = model.predict_proba(x_test)
@@ -289,7 +317,7 @@ def my_decision_tree(x_train, y_train, x_test, y_test):
     plt.show()
 
 
-def my_svm(x_train, y_train, x_test, y_test):
+def my_svm(x_train, y_train, x_test, y_test, pic_save=False, model_save=False, model_save_name=None):
     print("------------------SVM------------------")
     # model = svm.SVC(probability=True)
     # params = [
@@ -328,7 +356,8 @@ def my_svm(x_train, y_train, x_test, y_test):
     plt.title("混淆矩阵", y=1.01)
     plt.ylabel("真实值")
     plt.xlabel("预测值")
-    plt.savefig(os.path.join(pic_path, "svm_matric"), dpi=300)
+    if pic_save:
+        plt.savefig(os.path.join(pic_path, "svm_matric"), dpi=300)
     plt.show()
 
     # 绘制ROC曲线
@@ -346,8 +375,13 @@ def my_svm(x_train, y_train, x_test, y_test):
     plt.legend(loc="lower right")
     plt.show()
 
-    # with open("svm.pickle", "wb") as f:
-    #     pickle.dump(grid_svc, f)
+    if model_save:
+        if model_save_name is not None:
+            model_name = model_save_name + ".pickle"
+        else:
+            model_name = "svm.pickle"
+        with open(model_name, "wb") as f:
+            pickle.dump(grid_svc, f)
 
 
 

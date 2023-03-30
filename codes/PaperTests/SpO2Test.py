@@ -48,7 +48,7 @@ def cal_real_spo2(parent_dir):
         start = 1000
         step = 1000
         window = 4000
-        end = start + step
+        end = start + window
         while end <= len(ir2):
             # vmd
             # vmded_ir2, ir2_disturb = self.preprocess(ir2[start: end])
