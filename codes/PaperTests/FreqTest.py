@@ -76,16 +76,24 @@ def get_piece_peaks(piece_data, interval=40):
     max_data = max(piece_data)
     if max_data == piece_data[0] or max_data == piece_data[-1]:
         max_data = np.mean(piece_data)
+
     diff = np.diff(piece_data)
     for i in range(len(diff) - 2):
         if diff[i] > 0 and diff[i + 1] < 0:
             index = i + 1
             for j in range(0, 4):
-                if index + j < len(piece_data) and piece_data[index + j] - piece_data[index + j - 1] > 0 and \
-                        piece_data[index + j + 1] - piece_data[index + j] < 0:
+                if index + j < len(piece_data) and (piece_data[index + j] - piece_data[index + j - 1]) > 0 and \
+                        (piece_data[index + j + 1] - piece_data[index + j]) < 0:
                     peak_index = index + j
-                    if piece_data[peak_index] < 0.5 * max_data:
-                        break
+
+                    if piece_data[peak_index] < 0.35 * max_data:
+                        # 考虑最大值小于0，piece[peak_index]也小于0
+                        if piece_data[peak_index] == max_data:
+                            pass
+                        elif max_data - piece_data[peak_index] < 2000:
+                            pass
+                        else:
+                            break
                     if len(peakList) == 0:
                         peakList.append(peak_index)
                     else:
@@ -191,7 +199,7 @@ def discussion1(peak_list, valley_list):
         # copy_combine_list = copy.deepcopy(combine_list)
         del_list = []
         for i in range(len(combine_list)):
-            if combine_list[i][1] - combine_list[i][0] < 80:
+            if combine_list[i][1] - combine_list[i][0] < 100:
                 del_list.append(i)
 
         if len(del_list) != 0:
@@ -211,7 +219,7 @@ def discussion1(peak_list, valley_list):
         combine_list = list(zip(temp_peak_list, temp_valley_list))
         del_list = []
         for i in range(len(combine_list)):
-            if combine_list[i][1] - combine_list[i][0] < 80:
+            if combine_list[i][1] - combine_list[i][0] < 100:
                 del_list.append(i)
 
         if len(del_list) != 0:
@@ -233,7 +241,7 @@ def discussion1(peak_list, valley_list):
 
         del_list = []
         for i in range(len(combine_list)):
-            if combine_list[i][1] - combine_list[i][0] < 80:
+            if combine_list[i][1] - combine_list[i][0] < 100:
                 del_list.append(i)
 
         if len(del_list) != 0:
@@ -255,8 +263,11 @@ def new_peak_detect(data, freq=500, period_num=3, interval=350):
     pieces = list_split(data, period)
     peakList = []
     for number, piece in enumerate(pieces):
+
         piece_peak_list = get_piece_peaks(piece, interval=interval)
         temp_peak_list = [x + number*period for x in piece_peak_list]
+        # print("num = ", number)
+        # print("temp_peak_list = ", temp_peak_list)
         peakList += temp_peak_list
     return peakList
 
