@@ -18,7 +18,7 @@ from codes.PaperTests import PAPER_FIGURE_PATH
 from codes.utils.SaveToExcel import save_to_excel
 from codes.utils.Normal import normalization
 
-plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+plt.rcParams['font.sans-serif'] = ['SongNTR']  # 用来正常显示中文标签
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 
 
@@ -170,31 +170,31 @@ def resp_test(path):
     print(np.var(x), np.var(y))
     print(res)
 
-    # plt.figure(figsize=(10, 8))
-    # plt.subplot(211)
-    # plt.title("原始PPG信号")
-    # plt.plot(ir2, color="deeppink", label="PPG")
-    # plt.plot(resp, color="red", label="基线")
-    # plt.legend(loc="best")
-    # plt.subplot(212)
-    # plt.title("预处理后的PPG信号")
-    # plt.xlabel("采样点")
-    # plt.plot(filtered, color="royalblue", label="PPG")
-    # plt.legend(loc="best")
-    # plt.savefig(os.path.join(PAPER_FIGURE_PATH, "vmd分解图"), dpi=300)
-    # plt.show()
+    plt.figure(figsize=(10, 8))
+    plt.subplot(211)
+    plt.title("原始PPG信号")
+    plt.plot(ir2, color="deeppink", label="PPG")
+    plt.plot(vmd_resp, color="red", label="基线")
+    plt.legend(loc="best")
+    plt.subplot(212)
+    plt.title("去除基线后的PPG信号")
+    plt.xlabel("采样点")
+    plt.plot(filtered, color="royalblue", label="PPG")
+    plt.legend(loc="best")
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "vmd分解图"), dpi=300, bbox_inches="tight")
+    plt.show()
 
 def main():
     dir = r"D:\my_projects_V1\my_projects\PPG_V1\data\real_data\paper_resp"
     all_files = travel_dir(dir)
-    # path = r'D:\my_projects_V1\my_projects\PPG_V1\data\real_data\paper_resp\2023_02_17_12_02_54.txt'
+    path = r'D:\my_projects_V1\my_projects\PPG_V1\data\real_data\paper_resp\2023_02_17_12_02_54.txt'
     # path = r'D:\my_projects_V1\my_projects\PPG_V1\data\real_data\paper_resp\2023_02_17_12_45_36.txt'
-    # resp_test(path)
-    for file_path in all_files:
-        print(file_path)
-        resp_test(file_path)
+    resp_test(path)
+    # for file_path in all_files:
+    #     print(file_path)
+    #     resp_test(file_path)
 
 if __name__ == '__main__':
-    # main()
+    main()
     # resp_compare()
-    cal_resp()
+    # cal_resp()

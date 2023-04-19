@@ -28,7 +28,7 @@ def cal_spo2(R):
     spo2_third = spo2_validate(spo2_third)
 
     # 二元回归
-    # spo2_second = 99.39 + 20.13 * R - 26.91 * (R ** 2)
+    # spo2_second = 99.39 + fast.13 * R - 26.91 * (R ** 2)
 
     # spo2_second = 111.2 - 17.54 * R - 13.99 * (R ** 2)         # 3disturb_5pulse_test
 

@@ -16,7 +16,7 @@ from codes.utils.MyFilters import reverse, bandpass_filter, kalman_filter
 from codes.utils.Normal import normalization
 from codes.PaperTests import PAPER_FIGURE_PATH
 
-plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+plt.rcParams['font.sans-serif'] = ['SongNTR']  # 用来正常显示中文标签
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 
 def read_data(path, label="simulator"):
@@ -97,7 +97,7 @@ def peaks(path):
     # plt.axhline(ir2_mean, color="green")
     plt.legend(loc="best")
     plt.title("动态差分阈值法")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "动态差分阈值法"), dpi=300)
+    # plt.savefig(os.path.join(PAPER_FIGURE_PATH, "动态差分阈值法"), dpi=300, bbox_inches="tight")
     plt.show()
 
 def peakTest(filtered_data):
@@ -318,7 +318,7 @@ def threshTest(path):
     plt.xlabel("采样点")
     plt.ylabel("幅值")
     plt.legend(loc="best")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "幅度阈值法"), dpi=200)
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "幅度阈值法"), dpi=300, bbox_inches="tight")
     plt.show()
 
 
@@ -386,7 +386,7 @@ def hr_plot():
     plt.xlabel("采样点")
     plt.ylabel("幅值")
     plt.legend(loc="best")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "心率计算"), dpi=200)
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "心率计算"), dpi=300, bbox_inches="tight")
     plt.show()
 
 
@@ -398,13 +398,13 @@ if __name__ == '__main__':
     ir2, red2 = read_data(path, label="real")
     # ir2, red2 = read_data(path, label="simulator")
 
-    peaks(path)
+    # peaks(path)    # 动态差分阈值法
     # AMPD_test(path)
     # MarcosTest(path)
     # dwtTest(path)
     # threshTest(path)
     # hrTest(path)
-    # hr_plot()
+    hr_plot()
 
 """
 [  820  1385  1932  2440  2952  3496  4053  4604  5119  5642  6210  6793

@@ -3,7 +3,7 @@
 """
 @author: Mark Wu
 @file: BRDataClean.py
-@time: 2023/3/1 20:09
+@time: 2023/3/1 fast:09
 """
 import pandas as pd
 import os
@@ -53,24 +53,30 @@ def modify(csv_path, start=None, end=None, value=None):
 
 
 if __name__ == '__main__':
-    # csv_root_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea_csv"
+    csv_root_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea_csv"
 
-    csv_root_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\short_apnea_csv\wu"
+    # csv_root_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\short_apnea_csv\wu"
 
-    # csv_dir_name = "wu"
+    # csv_root_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\resp_test_csv"
+    # path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\resp_test\fast\20230410163348.txt"
+
+    csv_dir_name = "wu"
     # csv_dir_name = "tong"
     # csv_dir_name = "luo"
     # csv_dir_name = "lu"
     # csv_dir_name = "hu"
     # csv_dir_name = "xv"
 
-    csv_dir_name = "20"
+    # csv_dir_name = "fast"
+    # csv_dir_name = "slow"
+    # csv_dir_name = "normal"
+
     # csv_dir_name = "30"
     # csv_dir_name = "40"
     # csv_dir_name = "50"
     # csv_dir_name = "60"
 
-    # path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea\wu\20230306112311.txt"
+    path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea\wu\20230415104034.txt"
     # path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea\tong\20230305104243.txt"
     # path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea\luo\20230304103143.txt"
     # path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea\hu\20230304215746.txt"
@@ -78,14 +84,13 @@ if __name__ == '__main__':
     # path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea\xv\20230305110408.txt"
 
     # 不同时长
-    path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\short_apnea\wu\20\20230307112534.txt"
+    # path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\short_apnea\wu\fast\20230307112534.txt"
     # path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\short_apnea\wu\30\20230307095931.txt"
     # path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\short_apnea\wu\40\20230307103227.txt"
     # path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\short_apnea\wu\50\20230307104909.txt"
 
 
-
-    # save_dir = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea_csv\wu"
+    save_dir = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea_csv\wu"
     save_dir = os.path.join(csv_root_path, csv_dir_name)
     get_raw_data(path, save_dir)
 

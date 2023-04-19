@@ -15,7 +15,7 @@ from codes.utils.GetFileData import read_from_file
 from codes.utils.MyFilters import bandpass_filter
 from codes.PaperTests import PAPER_FIGURE_PATH
 
-plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+plt.rcParams['font.sans-serif'] = ['SongNTR']  # 用来正常显示中文标签
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 
 def getData(file_path):
@@ -31,7 +31,7 @@ def MyEMD(data):
 def emd_save_plot(data):
     s = np.array(data)
     imfs, res = MyEMD(s)
-    fig = plt.figure(figsize=(16, 12))
+    fig = plt.figure(figsize=(16, 10))
     ax_main = fig.add_subplot(len(imfs) + 3, 1, 1)
     ax_main.plot(data, color="magenta")
     ax_main.set_title("原始PPG信号")
@@ -48,14 +48,14 @@ def emd_save_plot(data):
         if i == 0:
             ax.set_title("EMD分解的分量")
         ax.set_xlim(0, len(imfs[i]) - 1)
-        ax.set_ylabel("imf%d" % (i + 1))
+        # ax.set_ylabel("imf%d" % (i + 1), fontsize=10.5)
         plt.subplots_adjust(hspace=0.9)
 
     ax = fig.add_subplot(len(imfs)+4, 1, len(imfs)+4)
     ax.plot(res, color="darkred")
     ax.set_title("残差")
     # ax.set_ylabel("residual")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "emd分解图"), dpi=300)
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "emd分解图"), dpi=300, bbox_inches="tight")
     plt.show()
 
 

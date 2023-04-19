@@ -15,7 +15,7 @@ from random import sample
 from codes.utils.GetFFT import signal_fft
 from codes.PaperTests import PAPER_FIGURE_PATH
 
-plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['font.sans-serif'] = ['SongNTR']
 plt.rcParams['axes.unicode_minus'] = False
 
 # fig = plt.figure()

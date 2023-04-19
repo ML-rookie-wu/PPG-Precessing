@@ -15,8 +15,8 @@ from codes.utils.GetFileData import read_from_file
 from codes.PaperTests import PAPER_FIGURE_PATH
 
 
-plt.rcParams["font.sans-serif"]=["SimHei"] #设置字体
-plt.rcParams["axes.unicode_minus"]=False #正常显示负号
+plt.rcParams["font.sans-serif"] = ["SongNTR"] #设置字体
+plt.rcParams["axes.unicode_minus"] = False #正常显示负号
 
 
 def reverse(data):
@@ -58,8 +58,10 @@ def hample_test():
     res = hampel(X, 3)
     plt.plot(X, label="原始数据")
     plt.plot(res, '--', label="去除异常值后的数据")
-    plt.legend(loc="best")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "hample_test"), dpi=200)
+    plt.legend(loc="best", fontsize=10.5)
+    plt.xticks(fontsize=10.5)
+    plt.yticks(fontsize=10.5)
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "hample_test"), dpi=300, bbox_inches="tight")
     plt.show()
 
 
@@ -73,33 +75,39 @@ def hample_ppg():
     plt.figure(figsize=(10, 8))
     plt.scatter(9998, ir2[9998], marker="o", color="red", label="outlier")
     plt.plot(ir2, label="PPG")
-    plt.ylabel("幅值")
-    plt.xlabel("采样点")
-    plt.title("原始PPG信号")
-    plt.legend(loc="best")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "异常值原始数据"), dpi=200)
+    plt.ylabel("幅值", fontsize=10.5)
+    plt.xlabel("采样点", fontsize=10.5)
+    # plt.title("原始PPG信号")
+    plt.xticks(fontsize=10.5)
+    plt.yticks(fontsize=10.5)
+    plt.legend(loc="best", fontsize=10.5)
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "异常值原始数据"), dpi=300, bbox_inches="tight")
     plt.show()
 
 
     plt.figure(figsize=(10, 8))
     plt.plot(ir2[9000: 11000])
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "异常值放大"))
+    plt.xticks(fontsize=10.5)
+    plt.yticks(fontsize=10.5)
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "异常值放大"), dpi=300, bbox_inches="tight")
     plt.show()
 
 
     plt.figure(figsize=(10, 8))
     plt.plot(hampled, label="PPG")
-    plt.xlabel("采样点")
-    plt.ylabel("幅值")
-    plt.title("去除异常值后的PPG")
-    plt.legend(loc="best")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "使用hample后"), dpi=200)
+    plt.xlabel("采样点", fontsize=10.5)
+    plt.ylabel("幅值", fontsize=10.5)
+    # plt.title("去除异常值后的PPG")
+    plt.legend(loc="best", fontsize=10.5)
+    plt.xticks(fontsize=10.5)
+    plt.yticks(fontsize=10.5)
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "使用hample后"), dpi=300, bbox_inches="tight")
     plt.show()
 
 
 def main():
-    hample_test()
-    # hample_ppg()
+    # hample_test()
+    hample_ppg()
 
 
 if __name__ == '__main__':

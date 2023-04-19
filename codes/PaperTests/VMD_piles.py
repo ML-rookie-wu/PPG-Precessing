@@ -3,14 +3,14 @@
 """
 @author: Mark Wu
 @file: VMD_piles.py
-@time: 2023/3/16 20:54
+@time: 2023/3/16 fast:54
 """
 import numpy as np
 import matplotlib.pyplot as plt
 from codes.utils.MyFilters import VMD
 from codes.utils.GetFileData import read_from_file
 from codes.utils.Normal import normalization
-
+from codes.PaperTests.BRApneaAnalysis import get_csv_data
 
 
 def cost_func(restruct, data):
@@ -61,13 +61,18 @@ def REI():
 
 def main():
     # file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\respiration\2\20230314200844.txt"
-    file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\real_data\paper_resp\2023_02_17_12_02_54.txt"
-    data = read_from_file(file_path)
-    ir = data.ir2
-    raw_data = np.array(ir[5000:9000])
+    # file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\real_data\paper_resp\2023_02_17_12_02_54.txt"
+    # data = read_from_file(file_path)
+    # ir = data.ir2
+    # raw_data = np.array(ir[5000:9000])
+
+    file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea_csv\wu\20230301205746.csv"
+    data = get_csv_data(file_path)
+    ir = data.ir
+    raw_data = ir[1000:7000]
 
     # K = 8
-    alpha = 10000
+    alpha = 5000
     tau = 1e-6
     Klist = range(1, 15)
     Elist = []
@@ -92,5 +97,5 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
-    REI()
+    main()
+    # REI()

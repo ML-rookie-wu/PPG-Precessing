@@ -14,8 +14,9 @@ import scipy
 from codes.PaperTests.FrequenceAnalysis import new_peak_detect
 from codes.PaperTests.BRApneaAnalysis import peak_detect, get_csv_data
 from codes.utils.MyFilters import bandpass_filter
+from codes.PaperTests import PAPER_FIGURE_PATH
 
-plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+plt.rcParams['font.sans-serif'] = ['SongNTR']  # 用来正常显示中文标签
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 
 
@@ -60,12 +61,21 @@ def test1(dir_path):
             plt.plot(buttered_data)
             plt.scatter(peak_list2, value2, color="cyan")
             plt.title("动态差分阈值法")
+
             # plt.subplot(313)
             # plt.plot(buttered_data)
             # plt.scatter(peak_list3, value3, color="purple")
             # plt.title("threshold method")
             # plt.subplots_adjust(hspace=0.5)
-            plt.show()
+            if file_path.endswith("1_1.csv"):
+                plt.figure(figsize=(10, 8))
+                plt.plot(buttered_data)
+                plt.scatter(peak_list2, value2, color="cyan")
+                plt.title("动态差分阈值法")
+                plt.savefig(os.path.join(PAPER_FIGURE_PATH, "动态差分阈值法有瑕疵"), dpi=300, bbox_inches="tight")
+                plt.show()
+                # plt.savefig(os.path.join(PAPER_FIGURE_PATH, "峰值点识别对比"), dpi=300, bbox_inches="tight")
+            # plt.show()
 
 
 if __name__ == '__main__':

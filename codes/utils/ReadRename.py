@@ -3,7 +3,7 @@
 """
 @author: Mark Wu
 @file: ReadRename.py
-@time: 2023/3/1 17:20
+@time: 2023/3/1 17:fast
 """
 
 import time
@@ -29,7 +29,7 @@ def copy_rename(old_path=None, new_dir_path=None, remove=False):
 
 
 if __name__ == '__main__':
-    # dir_name = "wu"
+    dir_name = "wu"
     # dir_name = "tong"
     # dir_name = "luo"
     # dir_name = "lu"
@@ -37,15 +37,19 @@ if __name__ == '__main__':
     # dir_name = "xv"
 
     # 不同时长
-    dir_name = "20"
+    # dir_name = "fast"
     # dir_name = "30"
     # dir_name = "40"
     # dir_name = "50"
     # dir_name = "60"
 
 
-    # root_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea"
-    root_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\short_apnea\wu"
+    root_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea"
+    # root_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\short_apnea\wu"
     new_path = os.path.join(root_path, dir_name)
+
+    dir_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\resp_test\fast"
+    # copy_rename(new_dir_path=new_path, remove=True)
     copy_rename(new_dir_path=new_path, remove=True)
+
 

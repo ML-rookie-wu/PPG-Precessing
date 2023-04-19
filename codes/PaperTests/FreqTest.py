@@ -112,7 +112,7 @@ def get_piece_peaks(piece_data, interval=40):
     return peakList
 
 
-def discussion(peak_list, valley_list, data):
+def discussion(peak_list, valley_list, data, peak_valley_interval=50):
     """获取上升支时间、波峰点与波谷点幅度差，根据波峰点和波谷点分四种情况讨论，如果不符合四种情况，说明波峰点或波谷点识别出错"""
     up_time = []
     amp_diff = []
@@ -123,7 +123,7 @@ def discussion(peak_list, valley_list, data):
         combine_list = list(zip(peak_list, temp_valley_list))
         # print("combine1----", combine_list)
         for x in combine_list:
-            if x[1] - x[0] < 50:
+            if x[1] - x[0] < peak_valley_interval:
                 continue
             up_time.append(x[1] - x[0])
             amp_diff.append(data[x[0]] - data[x[1]])
@@ -135,7 +135,7 @@ def discussion(peak_list, valley_list, data):
         combine_list = list(zip(peak_list, valley_list))
         # print("combine2------", combine_list)
         for x in combine_list:
-            if x[1] - x[0] < 50:
+            if x[1] - x[0] < peak_valley_interval:
                 continue
             up_time.append(x[1] - x[0])
             amp_diff.append(data[x[0]] - data[x[1]])
@@ -147,7 +147,7 @@ def discussion(peak_list, valley_list, data):
         combine_list = list(zip(temp_peak_list, temp_valley_list))
         # print("combine3-----------", combine_list)
         for x in combine_list:
-            if x[1] - x[0] < 50:
+            if x[1] - x[0] < peak_valley_interval:
                 continue
             up_time.append(x[1] - x[0])
             amp_diff.append(data[x[0]] - data[x[1]])
@@ -161,7 +161,7 @@ def discussion(peak_list, valley_list, data):
         combine_list = list(zip(temp_peak_list, temp_valley_list))
         # print("combine4------", combine_list)
         for x in combine_list:
-            if x[1] - x[0] < 50:
+            if x[1] - x[0] < peak_valley_interval:
                 continue
             up_time.append(x[1] - x[0])
             amp_diff.append(data[x[0]] - data[x[1]])
@@ -170,7 +170,7 @@ def discussion(peak_list, valley_list, data):
         raise Exception("the number of peak is not equal with the number of valley")
 
 
-def discussion1(peak_list, valley_list):
+def discussion1(peak_list, valley_list, peak_valley_interval=100):
     """去除重搏波波峰点和波谷点"""
     if len(valley_list) - len(peak_list) == 1:
         """波谷点比波峰点多一个，valley 开头，valley 结尾"""
@@ -180,7 +180,7 @@ def discussion1(peak_list, valley_list):
         # copy_combine_list = copy.deepcopy(combine_list)
         del_list = []
         for i in range(len(combine_list)):
-            if combine_list[i][1] - combine_list[i][0] < 80:
+            if combine_list[i][1] - combine_list[i][0] < peak_valley_interval:
                 del_list.append(i)
         if len(del_list) != 0:
             del_list.reverse()
@@ -199,7 +199,7 @@ def discussion1(peak_list, valley_list):
         # copy_combine_list = copy.deepcopy(combine_list)
         del_list = []
         for i in range(len(combine_list)):
-            if combine_list[i][1] - combine_list[i][0] < 100:
+            if combine_list[i][1] - combine_list[i][0] < peak_valley_interval:
                 del_list.append(i)
 
         if len(del_list) != 0:
@@ -219,7 +219,7 @@ def discussion1(peak_list, valley_list):
         combine_list = list(zip(temp_peak_list, temp_valley_list))
         del_list = []
         for i in range(len(combine_list)):
-            if combine_list[i][1] - combine_list[i][0] < 100:
+            if combine_list[i][1] - combine_list[i][0] < peak_valley_interval:
                 del_list.append(i)
 
         if len(del_list) != 0:
@@ -241,7 +241,7 @@ def discussion1(peak_list, valley_list):
 
         del_list = []
         for i in range(len(combine_list)):
-            if combine_list[i][1] - combine_list[i][0] < 100:
+            if combine_list[i][1] - combine_list[i][0] < peak_valley_interval:
                 del_list.append(i)
 
         if len(del_list) != 0:

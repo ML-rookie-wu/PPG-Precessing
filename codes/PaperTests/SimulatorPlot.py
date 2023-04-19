@@ -11,7 +11,7 @@ from codes.PaperTests import PAPER_FIGURE_PATH
 from codes.utils.GetFileData import read_from_file
 
 
-plt.rcParams["font.sans-serif"]=["SimHei"] #设置字体
+plt.rcParams["font.sans-serif"]=["SongNTR"] #设置字体
 plt.rcParams["axes.unicode_minus"]=False #正常显示负号
 
 
@@ -28,7 +28,7 @@ def no_resp_disturb():
     # ax.spines["top"].set_visible(False)
     # ax.spines["right"].set_visible(False)
     plt.legend(loc="best")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "无呼吸模拟仪数据"), dpi=300)
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "无呼吸模拟仪数据"), dpi=300, bbox_inches="tight")
     plt.show()
 
 def resp_disturb():
@@ -41,7 +41,7 @@ def resp_disturb():
     plt.ylabel("幅值")
     plt.xlabel("采样点")
     plt.legend(loc="best")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "有呼吸模拟仪数据"), dpi=300)
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "有呼吸模拟仪数据"), dpi=300, bbox_inches="tight")
     plt.show()
 
 def main():

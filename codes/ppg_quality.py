@@ -1,5 +1,5 @@
 # -*- coding: utf-86 -*-
-# @Time : 2022/10/13 20:42
+# @Time : 2022/10/13 fast:42
 # @Author : Mark Wu
 # @FileName: ppg_quality.py
 # @Software: PyCharm

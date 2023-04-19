@@ -17,6 +17,9 @@ from codes.utils.GetFFT import signal_fft, get_freq
 from codes.PaperTests.CalculateError import cal_abs_mean
 from codes.PaperTests import PAPER_FIGURE_PATH
 
+plt.rcParams['font.sans-serif'] = ['SongNTR']  # 用来正常显示中文标签
+plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
+
 def get_files(dir_path):
     all_files = travel_dir(dir_path)
     return all_files

@@ -3,7 +3,7 @@
 """
 @author: Mark Wu
 @file: BIDMC_DATA_PROCESS.py
-@time: 2023/2/26 20:45
+@time: 2023/2/26 fast:45
 """
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -18,7 +18,7 @@ from codes.PaperTests import PAPER_FIGURE_PATH
 from codes.PaperTests.CalculateError import cal_mse
 
 
-plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['font.sans-serif'] = ['SongNTR']
 plt.rcParams['axes.unicode_minus'] = False
 
 
@@ -144,7 +144,7 @@ def plot_pulse():
     # ax.spines['bottom'].set_visible(False)
     # ax.spines['left'].set_visible(False)
     plt.legend(loc="best")
-    # plt.savefig(os.path.join(PAPER_FIGURE_PATH, "脉率误差分析"), dpi=300, bbox_inches="tight")
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "脉率误差分析"), dpi=300, bbox_inches="tight")
     plt.show()
 
 def plot_resp():
@@ -200,6 +200,6 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    plot_pulse()
-    # plot_resp()
+    # plot_pulse()
+    plot_resp()
     # mse()

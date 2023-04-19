@@ -29,7 +29,9 @@ from codes.PaperTests.BRApneaAnalysis import peak_detect, discussion
 from codes.PaperTests.Model_Regression import my_random_forest, my_bayes, my_logistic, my_knn, my_svm, my_decision_tree
 from codes.PaperTests import PAPER_FIGURE_PATH
 
-plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+# plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+plt.rcParams['font.sans-serif'] = ['SongNTR']  # 用来正常显示中文标签
+
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 
 
@@ -485,7 +487,7 @@ def make_features():
     plt.figure(figsize=(10, 8))
     sns.heatmap(df_features.corr(), annot=True)
     plt.xticks(rotation=45)
-    # plt.savefig(os.path.join(PAPER_FIGURE_PATH, "相关性new"), dpi=300, bbox_inches="tight")
+    # plt.savefig(os.path.join(PAPER_FIGURE_PATH, "相关性new1"), dpi=300, bbox_inches="tight")
     plt.show()
 
 
@@ -631,8 +633,8 @@ if __name__ == '__main__':
     # main()
     # make_lstm_dataset()
     # make_lstm_dataset_all()
-    # make_features()
-    model_test()
+    make_features()
+    # model_test()
     # model_test1()
     # process_test1()
     # time_analysis()

@@ -237,7 +237,7 @@ def collect_resp_data(save_path=None):
         dir = r'D:\my_projects_V1\my_projects\PPG_V1\data\real_data\paper_resp'
         path = os.path.join(dir, time.strftime("%Y%m%d%H%M%S", time.localtime()) + '.txt')
 
-    read_package(path, num=180000)
+    read_package(path, num=90000)
     data = pd.read_table(path, sep=",")
     if data.shape[1] == 6:
         data.columns = ["time", "ir1", "red1", "ir2", "red2", "resp"]
@@ -249,11 +249,11 @@ def collect_resp_data(save_path=None):
 
 if __name__ == '__main__':
 
-    # collect_data_spo2(read_package_from_port)
+    # collect_data_spo2(read_package_from_port)`
     # collect_data_pulse(read_package_from_port)
-    # collect_test()
+    collect_test()
     # collect_real_data()
     # collect_resp_data()
 
-    collect_resp_data(save_path=r'D:\my_projects_V1\my_projects\PPG_V1\data\resp_compare\diff_situations')
+    # collect_resp_data(save_path=r'D:\my_projects_V1\my_projects\PPG_V1\data\resp_compare\diff_situations')
 

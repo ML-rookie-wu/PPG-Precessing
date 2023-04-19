@@ -17,6 +17,9 @@ from codes.utils.MyFilters import reverse, bandpass_filter
 # from codes.utils.Normal import normalization
 from codes.PaperTests import PAPER_FIGURE_PATH
 
+plt.rcParams['font.sans-serif'] = ['SongNTR']  # 用来正常显示中文标签
+plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
+
 def getData(file_path):
     data = read_from_file(file_path)
     return data
@@ -92,9 +95,9 @@ def main():
     peaks_y = [new_data1[x] for x in new_peaks]
     diff = np.diff(peaks)
     valley_diff = np.diff(new_peaks)
-    print(diff)
-    print(valley_diff)
-    print(np.mean(diff), np.mean(valley_diff))
+    # print(diff)
+    # print(valley_diff)
+    # print(np.mean(diff), np.mean(valley_diff))
 
     plt.figure(figsize=(10, 8))
     # plt.subplot(211)
@@ -107,7 +110,7 @@ def main():
     plt.xlabel("采样点")
     plt.ylabel("幅值")
     plt.legend(loc="best")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "三次样条插值图"), dpi=300)
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "三次样条插值图"), dpi=300, bbox_inches="tight")
     plt.show()
 
     plt.figure(figsize=(10, 8))
@@ -123,8 +126,10 @@ def main():
     plt.title("三次样条插值后的PPG")
     plt.xlabel("采样点")
     # plt.plot(new_data2, color="green")
+    # plt.xticks(fontsize=10.5)
+    # plt.yticks(fontsize=10.5)
     plt.legend(loc="best")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "三次样条插值对比图"), dpi=300)
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "三次样条插值对比图"), dpi=300, bbox_inches="tight")
     plt.show()
 
 

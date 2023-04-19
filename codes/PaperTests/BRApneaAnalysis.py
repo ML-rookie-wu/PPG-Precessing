@@ -20,7 +20,8 @@ from codes.PaperTests import PAPER_FIGURE_PATH
 from codes.PaperTests.Model import svr, mlpregressor, random_forest, adboost, bagging, decision_tree
 from codes.PaperTests.HampleTest import hampel
 
-plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+# plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+plt.rcParams['font.sans-serif'] = ['SongNTR']  # 用来正常显示中文标签
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 
 
@@ -212,11 +213,11 @@ def get_features_points(dir_path):
             plt.subplot(414)
             plt.plot(ir_data)
             plt.title("PPG信号")
-            plt.xlabel("采样点")
-            plt.ylabel("幅值")
+            # plt.xlabel("采样点")
+            # plt.ylabel("幅值")
             plt.subplots_adjust(hspace=0.8)
             if f_name == "20230301174724":
-                plt.savefig(os.path.join(PAPER_FIGURE_PATH, "标注"), dpi=300, bbox_inches="tight")
+                plt.savefig(os.path.join(PAPER_FIGURE_PATH, "标注1"), dpi=300, bbox_inches="tight")
             plt.show()
 
 
@@ -251,27 +252,38 @@ def plot_test(dir_path):
 
 
 def plot_one():
-    file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea_csv\wu\20230305102716.csv"
+    # file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea_csv\wu\20230305102716.csv"
+    file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea_csv\wu\20230301174724.csv"
+    # file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\BR\apnea_csv\wu\20230301205746.csv"
+
     data = get_csv_data(file_path)
     ir = data.ir
     resp = data.resp
     pr = data.pr
     spo2 = data.spo2
 
-    plt.subplot(211)
-    plt.plot(ir)
-    plt.subplot(212)
-    plt.plot(resp)
-    plt.show()
+    # plt.subplot(211)
+    # plt.plot(ir)
+    # plt.subplot(212)
+    # plt.plot(resp)
+    # plt.show()
 
+    x_ticks = np.arange(0, len(pr) + 1000, 2500)
+    label = ["0", "12500", "25000", "37500", "50000", "62500", "75000", "87500", "100000"]
     plt.subplot(411)
     plt.plot(pr)
+    plt.xticks(x_ticks, label)
     plt.subplot(412)
     plt.plot(spo2)
+    plt.xticks(x_ticks, label)
     plt.subplot(413)
     plt.plot(resp)
+    plt.xticks(x_ticks, label)
     plt.subplot(414)
     plt.plot(ir)
+    plt.xticks(x_ticks, label)
+    plt.subplots_adjust(hspace=0.8)
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "标注modify"), dpi=300, bbox_inches="tight")
     plt.show()
 
 
@@ -509,7 +521,7 @@ def process(dir_path):
     plt.figure(figsize=(10, 8))
     sns.heatmap(df_features.corr(), annot=True)
     # plt.savefig(os.path.join(PAPER_FIGURE_PATH, "相关性25"), dpi=300, bbox_inches="tight")
-    # plt.show()
+    plt.show()
 
 
 def identify_features(dir_path):
@@ -569,9 +581,9 @@ if __name__ == '__main__':
 
     # plot_one()
     # plot_test(dir_path)
-    identify_features(dir_path)
-    # get_features_points(dir_path)
+    # identify_features(dir_path)
+    # get_features_points(dir_path)     #
     # freq_test(dir_path)
-    # process(dir_path)
+    process(dir_path)
     # model_test()
     # get_delay_time()

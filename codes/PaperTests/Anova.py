@@ -13,13 +13,14 @@ import seaborn as sns
 # from IPython.display import Image
 # import pydotplus
 import matplotlib.pyplot as plt
-sns.set()
+# sns.set()
 # os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
 # plt.rcParams['font.sans-serif'] = ['Time New Roman']
 # plt.rcParams['font.serif'] = ['simhei']
+plt.rcParams['font.sans-serif'] = ['SongNTR']
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
-plt.rc("font", family="Time New Roman")
-sns.set_style("darkgrid", {"font.sans-serif": ['simhei', 'Droid Sans Fallback']})
+# plt.rc("font", family="Time New Roman")
+sns.set_style("darkgrid")
 
 #数学包
 from scipy import stats
@@ -116,9 +117,9 @@ def analysis(df_0, column_name):
         ax = fig.add_subplot(4, 3, i)
         sns.boxplot(x="label", y=column_name[i], data=df_0, ax=ax, meanline=True, showmeans=True)  # ,order=df_p1_sub.index
         # ax.set_title(column_name[i])
-        sns.set_theme(font="Time New Roman")
+        # sns.set_theme(font="Time New Roman")
         plt.subplots_adjust(wspace=0.5, hspace=0.3)
-    # plt.savefig(os.path.join(PAPER_FIGURE_PATH, "特征分析"), dpi=300, bbox_inches="tight")
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "特征分析1"), dpi=300, bbox_inches="tight")
     plt.show()
 
 

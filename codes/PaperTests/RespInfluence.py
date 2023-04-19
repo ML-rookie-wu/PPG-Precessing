@@ -18,7 +18,8 @@ from codes.utils.MyFilters import bandpass_filter, reverse
 from codes.PaperTests import PAPER_FIGURE_PATH
 
 
-plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+# plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+plt.rcParams['font.sans-serif'] = ['SongNTR']  # 用来正常显示中文标签
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 
 
@@ -88,7 +89,7 @@ def pav(data):
     plt.scatter(peaks, peaks_value, color="red", label="波峰点")
     plt.scatter(valleys, valleys_value, color="darkorchid", label="波谷点")
     plt.legend(loc="best")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "振幅调制"), dpi=300, bbox_inches="tight")
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "振幅调制2"), dpi=300, bbox_inches="tight")
     plt.show()
 
 def riiv(data):
@@ -105,10 +106,10 @@ def riiv(data):
     plt.title("RIIV")
     plt.xlabel("采样点")
     plt.ylabel("幅值")
-    plt.scatter(valleys, valleys_value, color="darkorange", label="波峰点")
+    plt.scatter(valleys, valleys_value, color="darkorange", label="波谷点")
     plt.plot(interp_points, interp_values, color="red", label="基线调制")
     plt.legend(loc="best")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "基线调制"), dpi=300, bbox_inches="tight")
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "基线调制2"), dpi=300, bbox_inches="tight")
     plt.show()
 
 def prv(data):
@@ -125,18 +126,18 @@ def prv(data):
     plt.ylabel("幅值")
     plt.scatter(peaks, peaks_value, color="darkorange", label="波谷点")
     plt.legend(loc="best")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "频率调制"), dpi=300, bbox_inches="tight")
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "频率调制2"), dpi=300, bbox_inches="tight")
     plt.show()
 def main():
-    # path = r'D:\my_projects_V1\my_projects\PPG_V1\data\paper_test\1disturb_3pulse\98\20221129195154_98.txt'
-    path = r'D:\my_projects_V1\my_projects\PPG_V1\data\hr_test\0disturb\90\20230209103108_90.txt'
-    path = r'D:\my_projects_V1\my_projects\PPG_V1\data\real_data\paper_resp\2023_02_17_12_02_54.txt'
+    path = r'D:\my_projects_V1\my_projects\PPG_V1\data\paper_test\1disturb_3pulse\98\20221129195154_98.txt'
+    # path = r'D:\my_projects_V1\my_projects\PPG_V1\data\hr_test\0disturb\90\20230209103108_90.txt'
+    # path = r'D:\my_projects_V1\my_projects\PPG_V1\data\real_data\paper_resp\2023_02_17_12_02_54.txt'
 
     ir2 = get_data(path)
     ir2_pav = ir2[0:4000]
     ir2_riiv = ir2[0:15000]
-    # pav(ir2_pav)
-    # riiv(ir2_riiv)
+    pav(ir2_pav)
+    riiv(ir2_riiv)
     prv(ir2_riiv)
 
 

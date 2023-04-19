@@ -1,5 +1,5 @@
 # -*- coding: utf-86 -*-
-# @Time : 2022/10/30 20:54
+# @Time : 2022/10/30 fast:54
 # @Author : Mark Wu
 # @FileName: collect_data.py
 # @Software: PyCharm

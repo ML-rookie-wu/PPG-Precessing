@@ -12,7 +12,7 @@ from codes.utils.GetFileData import read_from_file
 from codes.utils.MyFilters import bandpass_filter
 from codes.PaperTests import PAPER_FIGURE_PATH
 
-plt.rcParams["font.sans-serif"]=["SimHei"] #设置字体
+plt.rcParams["font.sans-serif"]=["SongNTR"] #设置字体
 plt.rcParams["axes.unicode_minus"]=False #正常显示负号
 
 def get_data(path):
@@ -25,22 +25,37 @@ def butter():
     data = get_data(path)[1000: 5000]
     buttered = bandpass_filter(data, start_fs=0.1, end_fs=5)
     plt.figure(figsize=(10, 8))
-    plt.plot(data, label="PPG")
+    plt.plot(list(data), label="PPG")
     plt.title("原始PPG信号")
-    plt.ylabel("采样点")
-    plt.xlabel("幅值")
-    plt.legend(loc="best")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "butter原始信号"), dpi=300)
-    plt.show()
-
-    plt.figure(figsize=(10, 8))
-    plt.plot(buttered, label="filtered")
-    plt.title("滤波后的PPG信号")
     plt.ylabel("幅值")
     plt.xlabel("采样点")
     plt.legend(loc="best")
-    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "butter滤波后"), dpi=200)
+    plt.savefig(os.path.join(PAPER_FIGURE_PATH, "butter原始信号"), dpi=300, bbox_inches="tight")
     plt.show()
+    #
+    # plt.figure(figsize=(10, 8))
+    # plt.plot(buttered, label="filtered")
+    # plt.title("滤波后的PPG信号")
+    # plt.ylabel("幅值")
+    # plt.xlabel("采样点")
+    # plt.legend(loc="best")
+    # plt.savefig(os.path.join(PAPER_FIGURE_PATH, "butter滤波后"), dpi=300, bbox_inches="tight")
+    # plt.show()
+
+    # plt.figure(figsize=(10, 8))
+    # plt.subplot(211)
+    # plt.plot(list(data), label="PPG")
+    # plt.title("原始PPG信号")
+    # plt.ylabel("幅值")
+    # plt.legend(loc="best")
+    # plt.subplot(212)
+    # plt.plot(buttered, label="Filtered")
+    # plt.title("Butterworth滤波后的PPG信号")
+    # plt.ylabel("幅值")
+    # plt.xlabel("采样点")
+    # plt.legend(loc="best")
+    # plt.savefig(os.path.join(PAPER_FIGURE_PATH, "butter滤波对比图"), dpi=300, bbox_inches="tight")
+    # plt.show()
 
 if __name__ == '__main__':
     butter()

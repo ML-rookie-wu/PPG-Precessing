@@ -19,10 +19,11 @@ from codes.utils.MyFilters import bandpass_filter
 
 
 def get_data():
-    file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\respiration\2\20230314200844.txt"
+    # file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\respiration\2\20230314200844.txt"
+    file_path = r"D:\my_projects_V1\my_projects\PPG_V1\data\real_data\wu\resp\2022_12_08_16_34_06.txt"
     data = read_from_file(file_path)
     ir = data.ir2
-    raw_data = np.array(ir[5000:9000])
+    raw_data = np.array(ir)
     buttered = bandpass_filter(raw_data, start_fs=0.1, end_fs=5, fs=500)
 
     plt.subplot(211)
@@ -38,7 +39,13 @@ def extract_ppg45(single_waveform, sample_rate=500):
     def __next_pow2(x):
         return 1<<(x-1).bit_length()
     features = []
-    maxima_index = argrelmax(np.array(single_waveform))[0]
+    maxima_index = argrelmax(np.array(single_waveform), order=200)[0]
+    print("argrelmax -----> ", argrelmax(np.array(single_waveform)))
+    maxima_value = [single_waveform[i] for i in maxima_index]
+
+    plt.plot(single_waveform)
+    plt.scatter(maxima_index, maxima_value, color="red")
+    plt.show()
     minima_index = argrelmin(np.array(single_waveform))[0]
     derivative_1 = np.diff(single_waveform, n=1) * float(sample_rate)
     derivative_1_maxima_index = argrelmax(np.array(derivative_1))[0]
